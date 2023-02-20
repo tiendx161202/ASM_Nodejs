@@ -1,0 +1,136 @@
+
+
+.register_btn {
+    margin-right: 70px;
+    background-color: #82AE46;
+    color: white;
+    transition: all .3s ease;
+}
+
+.register_btn:hover {
+    background-color: white;
+}
+
+.register_btn:hover a {
+    color: #82AE46;
+}
+
+/* Register */
+.from_register {
+    top: 7%;
+    left: 29%;
+    position: absolute;
+    width: 650px;
+    height: 950px;
+    background-color: #E0E2DF;
+    border-radius: 5px;
+}
+
+.text_register {
+    border-radius: 5px;
+    left: 12%;
+    top: 12%;
+    position: absolute;
+    text-align: center;
+    width: 500px;
+    height: 380px;
+}
+
+.text_register h2 {
+    margin-bottom: 40px;
+}
+
+.user_register,
+.password_register,
+.email_register ,
+.name_register,
+.address_register{
+    margin-bottom: 20px;
+}
+
+
+.user_register i,
+.password_register i,
+.email_register i,
+.phone_register i,
+.name_register i,
+.address_register i,
+.address_register i {
+    font-size: 25px;
+    margin-right: 40px;
+}
+
+.has_error {
+    height: 30px;
+    width: 300px;
+    margin-left: 75px !important;
+    text-align: left;
+    color: red !important;
+}
+
+.btn_confirm {
+    position: absolute;
+    bottom: 4%;
+    left: 58%;
+
+}
+
+.btn_confirm button {
+    background-color: #82AE46;
+    color: white;
+    transition: all .3s ease;
+}
+
+.btn_confirm button:hover {
+    background-color: white;
+    border: 1px solid #82AE46;
+    color: #82AE46;
+}
+
+.btn_confirm button {
+    padding: 10px 30px 10px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn_loginUser{
+    position: absolute;
+    bottom: 4%;
+    left: 30%;
+    background-color: #82AE46;
+    padding: 10px 30px;
+    border-radius: 5px;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.btn_loginUser:hover{
+    background-color: white;
+    border: 1px solid #82AE46;
+}
+
+.btn_loginUser a{
+    text-decoration: none;
+    color: white;
+    transition: all .3s ease;
+}
+
+.btn_loginUser:hover a{
+    color: #82AE46;
+}
+
+.icon_close_login {
+    cursor: pointer;
+    padding: 10px;
+    right: 5px;
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.icon_close_login a {
+    color: black;
+}
+
+/* End Login and Register */

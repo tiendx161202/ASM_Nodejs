@@ -1,0 +1,134 @@
+/* Login and Register */
+
+.login_customer {
+    position: relative;
+}
+
+.content_customers {
+    width: 100%;
+    height: 1100px;
+}
+
+.content_customers img {
+    width: 100%;
+    height: 100%;
+}
+
+/* login */
+.from_login {
+    top: 15%;
+    left: 29%;
+    position: absolute;
+    width: 650px;
+    height: 500px;
+    background-color: #E0E2DF;
+    border-radius: 5px;
+}
+
+.from_login .icon_close_login {
+    cursor: pointer;
+    padding: 10px;
+    right: 5px;
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.text_login {
+    border-radius: 5px;
+    left: 12%;
+    top: 12%;
+    position: absolute;
+    text-align: center;
+    width: 500px;
+    height: 380px;
+}
+
+.text_login h2 {
+    margin-bottom: 40px;
+}
+
+.icon_input_login {
+    width: 505px;
+    height: 165px;
+}
+
+.icon_input_login input {
+    width: 420px;
+    height: 50px;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #F0F0F0;
+}
+
+.user_login {
+    margin-bottom: 25px;
+}
+
+.user_login i,
+.password_login i {
+    font-size: 25px;
+    margin-right: 40px;
+}
+
+.err_log{
+    height: 30px;
+    width: 300px;
+    margin-left: 75px !important;
+    text-align: left;
+    color: red !important;
+}
+
+.forgot_password {
+    margin-top: 10px;
+    text-align: end;
+    padding: 5px;
+}
+
+.forgot_password a {
+    text-decoration: none;
+}
+
+.btn_login {
+    position: absolute;
+    bottom: 15%     ;
+    left: 28%;
+}
+
+.btn_login button {
+    padding: 10px 30px 10px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.btn_login button a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.login_btn {
+    background-color: #82AE46;
+    color: white;
+    transition: all .3s ease;
+}
+
+.login_btn:hover {
+    background-color: white;
+    color: #82AE46;
+}
+
+
+
+.has_error {
+    height: 30px;
+    width: 300px;
+    margin-left: 75px !important;
+    text-align: left;
+    color: red !important;
+}
+

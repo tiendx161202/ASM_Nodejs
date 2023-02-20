@@ -1,0 +1,125 @@
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/img/img_slider/slider1.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="/img/img_slider/slider2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="/img/img_slider/slider3.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="bi bi-arrow-left-circle left_icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="bi bi-arrow-right-circle right_icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<!-- Store offers -->
+    <div class="content_store">
+        <div class="text_store">
+            <h2>DỊCH VỤ</h2>
+            <p>Khách hàng sẽ nhận được nhiều <br> ưu đãi khác nhau</p>
+        </div>
+
+        <div class="endows">
+            <div class="endow_content">
+                <img src="/img/img_endows/free-delivery.jpg" alt="">
+                <div class="endow_text">
+                    <h5>MIỄN PHÍ VẬN CHUYỂN</h5>
+                    <p>Đối với đơn đặt hàng trên $100</p>
+                </div>
+            </div>
+            <div class="endow_content">
+                <img src="/img/img_endows/diet.jpg" alt="">
+                <div class="endow_text">
+                    <h5>HOA QUẢ TƯƠI SẠCH</h5>
+                    <p>Quy trình nhập hàng, vận chuyển, <br> bảo quản chuyên nghiệp</p>
+                </div>
+            </div>
+            <div class="endow_content">
+                <img src="/img/img_endows/award.jpg" alt="">
+                <div class="endow_text">
+                    <h5>CHẤT LƯỢNG CAO</h5>
+                    <p>Đặt sức khỏe người tiêu dùng <br> lên hàng đầu</p>
+                </div>
+            </div>
+            <div class="endow_content">
+                <img src="/img/img_endows/customer-service.jpg" alt="">
+                <div class="endow_text">
+                    <h5>HỖ TRỢ</h5>
+                    <p>24/7</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  End Store offers-->
+
+    <div class="lines"></div>
+
+<!-- -Vegetable- -->
+    <div class="content_news">
+        <div class="text_news">
+            <h2>Rau</h2>
+            <p>Rau tươi và sạch an toàn vệ sinh thực phẩm</p>
+        </div>
+        <div class="all_product">
+            <div class="list_product">
+                <div class="row_product" id="product">
+                    {{#each products}}
+                    <div class="col_product">
+                        <div class="product_item">
+                            <div class="product_img">
+                                <img src="{{this.img}}" alt="">
+                            </div>
+                            <div class="text_product">
+                                <h6>{{this.name}}</h6>
+                                <p>{{this.description}}</p>
+                                <div class="price">{{this.price}}</div>
+                            </div>
+                            <div class="icon_product">
+                                <input type="submit" name="addcart" value="Chi tiết" class="bi bi-cart-fill cart" class="bi bi-heart-fill favorites">
+                                <input type="submit" name="add_to_cart" value="Thêm giỏ" class="bi bi-cart-fill cart">
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="view_all">
+        <button class="btn_all"><a href="">Xem tất cả </a></button>
+    </div>
+    </div>
+    <!-- -End Vegetable- -->
+
+    <div class="lines"></div>

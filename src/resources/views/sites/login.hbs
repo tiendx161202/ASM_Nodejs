@@ -1,0 +1,57 @@
+<div>
+    {{#if err_login}}
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        {{err_login}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+</div>
+
+
+<div class="login_customer">
+    <div class="content_customers">
+        <img src="/img/img_login/login.jpg" alt="">
+    </div>
+
+    <form action="/login" class="from_login" method="POST" role="form" autocomplete="off">
+        <div class="icon_close_login">
+            <a href="/">
+                <i class="bi bi-x-lg"></i>
+            </a>
+        </div>
+
+        <div class="text_login">
+            <h2>Đăng nhập</h2>
+            <div class="icon_input_login">
+                <div class="user_login">
+                    <i class="bi bi-person-circle"></i>
+                    <input type="text" placeholder="Tên đăng nhập..." name="username">
+                    <div class="err_log">
+                        {{#if login_usererr}}
+                        {{login_usererr}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="password_login">
+                    <i class="bi bi-lock-fill"></i><input type="password" placeholder="Mật khẩu..." name="password">
+                    <div class="err_log">
+                        {{#if password_err}}
+                        {{password_err}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="forgot_password">
+                <a href="#">Quên mật khẩu?</a>
+            </div>
+        </div>
+
+        <div class="btn_login">
+            <button class="register_btn" id="register">
+                <a href="/register">Đăng kí</a>
+            </button>
+            <button type="submit" class="login_btn">Đăng nhập</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,101 @@
+<div>
+    {{#if message}}
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+</div>
+
+<div>
+    {{#if err_warning}}
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        {{err_warning}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+</div>
+
+<div class="login_customer">
+    <div class="content_customers">
+        <img src="/img/img_login/login.jpg" alt="">
+    </div>
+    <form class="from_register" method="POST" role="form" autocomplete="off">
+        <div class="icon_close_login">
+            <a href="">
+                <i class="bi bi-x-lg"></i>
+            </a>
+        </div>
+
+        <div class="text_register">
+            <h2>Đăng kí</h2>
+            <div class="icon_input_login">
+                <div class="user_register">
+                    <i class="bi bi-person-circle"></i><input type="text" placeholder="Tên đăng nhập..."
+                        name="customer_username">
+                    <div class="has_error">
+                        {{#if user_err}}
+                        {{user_err}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="password_register">
+                    <i class="bi bi-lock-fill"></i><input type="password" placeholder="Mật khẩu..."
+                        name="customer_password">
+                    <div class="has_error">
+
+                    </div>
+                </div>
+                <div class="password_register">
+                    <i class="bi bi-lock-fill"></i><input type="password" placeholder="Mật lại mật khẩu..."
+                        name="customer_rpassword">
+                    <div class="has_error">
+                        {{#if password_err}}
+                        {{password_err}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="name_register">
+                    <i class="bi bi-person-circle"></i><input type="text" placeholder="Họ tên..." name="customer_name">
+                    <div class="has_error">
+                        {{#if fullname_err}}
+                        {{fullname_err}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="email_register">
+                    <i class="bi bi-envelope-fill"></i><input placeholder="Email..." name="customer_email">
+                    <div class="has_error">
+                        {{#if email_err}}
+                        {{email_err}}
+                        {{/if}}
+
+                    </div>
+                </div>
+                <div class="phone_register">
+                    <i class="bi bi-telephone-fill"></i><input type="text" placeholder="SĐT..." name="customer_phone">
+                    <div class="has_error">
+                        {{#if phone_err}}
+                        {{phone_err}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="address_register">
+                    <i class="bi bi-geo-alt-fill"></i><input type="text" placeholder="Địa chỉ..."
+                        name="customer_address">
+                    <div class="has_error">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn_confirm" id="confirm">
+            <button type="submit">Đăng kí</button>
+        </div>
+
+        <div class="btn_loginUser">
+            <a href="/login">Đăng nhập</a>
+        </div>
+    </form>
+</div>
