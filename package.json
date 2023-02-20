@@ -2,10 +2,10 @@
   "name": "sem3-asm-nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/app.js",
   "type": "commonjs",
   "scripts": {
-    "start": "nodemon --inspect src/index.js",
+    "start": "nodemon --inspect src/app.js",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "watch2": "node-sass --watch src/resources/scss/admin --output src/public/css/admin",
     "test": "echo \"Error: no test specified\" && exit 1"
