@@ -3,6 +3,9 @@
         "Chính",
         "Khẩu",
         "Khoản",
-        "Không"
+        "Không",
+        "middlewares",
+        "superadmin",
+        "useradmin"
     ]
 }

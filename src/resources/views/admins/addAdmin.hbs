@@ -1,0 +1,116 @@
+{{!-- <p class="thongbao-phanquyen">
+    <span>Bạn Không Đủ Quyền Quản Lý Mục Này</span><br>
+    <span><a href="index.php">Bấm Vào Đậy Để Quay Lại Trang Chủ!</a></span>
+</p> --}}
+<div>
+    {{#if message}}
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+</div>
+
+<div>
+    {{#if err_warning}}
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        {{err_warning}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+</div>
+
+
+<div style="text-align: center;">
+    <h1>Thêm Nhận Sự</h1>
+</div>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-add-edit" id="dataTable" width="100%" cellspacing="0">
+            <form method="POST" role="form" autocomplete="off">
+                <thead>
+                    <tr>
+                        <td>Họ tên</td>
+                        <td><input type="text" name="customer_name" class="add-edit-input"></td>
+                        <div class="has_error">
+                        {{#if fullname_err}}
+                        {{fullname_err}}
+                        {{/if}}
+                    </div>
+                    </tr>
+                    <tr>
+                        <td>SĐT</td>
+                        <td><input type="text" name="customer_phone" class="add-edit-input"></td>
+                        <div class="has_error">
+                        {{#if phone_err}}
+                        {{phone_err}}
+                        {{/if}}
+                    </div>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ</td>
+                        <td><input type="text" name="customer_address" class="add-edit-input"></td>
+                        <div class="has_error">
+                       
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" name="customer_email" class="add-edit-input"></td>
+                        <div class="has_error">
+                        {{#if email_err}}
+                        {{email_err}}
+                        {{/if}}
+                    </div>
+                    </tr>
+                    <tr>
+                        <td>Tên đăng nhập</td>
+                        <td><input type="text" name="customer_username" class="add-edit-input"></td>
+                        <div class="has_error">
+                        {{#if user_err}}
+                        {{user_err}}
+                        {{/if}}
+                    </div>
+                    </tr>
+                    <tr>
+                        <td>Mật khẩu</td>
+                        <td><input type="text" name="customer_password" class="add-edit-input"></td>
+                        <div class="has_error">
+                        {{#if password_err}}
+                        {{password_err}}
+                        {{/if}}
+                    </div>
+                    </tr>
+                    <tr>
+                        <td>Nhập lại mật khẩu</td>
+                        <td><input type="text" name="customer_rpassword" class="add-edit-input"></td>
+                        <div class="has_error">
+                        {{#if password_err}}
+                        {{password_err}}
+                        {{/if}}
+                    </div>
+                    </tr>
+                    <tr>
+                        <td>Chức Vụ</td>
+                        <td>
+                            <select name="role_name">
+                                <option value="Quản lý">Quản lý</option>
+                                <option value="Nhân viên">Nhân viên</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="function_click">
+                                <input type="submit" name="addAdmin" value="Thêm mới" class="add-edit-submit">
+                                <a href="" class="function_click-back">
+                                    <i class="bi bi-arrow-left"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+            </form>
+        </table>
+    </div>
+</div>
