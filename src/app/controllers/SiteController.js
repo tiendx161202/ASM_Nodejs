@@ -1,6 +1,5 @@
 const Product = require("../models/Product");
 const User = require("../models/User");
-const session = require("express-session");
 
 const {
   mongooseToObject,

@@ -7,10 +7,16 @@ const {
 } = require("../../util/mongoose");
 
 class ProductController {
-    index(req,res,next){
-        res.render("products/allProduct");
-    }
+  async index(req, res, next) {
+    Product.find({}).then(function (product) {
+      if (!product) {
+        return res.status(400).json({ error: "message" });
+      }
+      res.render("products/allProduct", {
+        products: multipleMongooseToObject(product),
+      });
+    });
+  }
 }
 
 module.exports = new ProductController();
-
