@@ -1,0 +1,22 @@
+<div class="xem">
+        <div class="chitiet">
+            <div class="chitiet_sanpham">
+                {{#with users}}
+                <p>Họ tên: {{this.fullname}}</p>
+                <p>SĐT:{{this.numberphone}} </p>
+                <p>Địa chỉ:{{this.address}} </p>
+                <p>Email: {{this.email}}</p>
+                <p>Tên đăng nhập:{{this.username}} </p>
+                <p>Quyền han:{{this.role_name}}</p>
+                {{/with}}
+            </div>
+        </div>
+        <div class="function_click">    
+            <a href=""class="function_click-edit">
+                <i class="fas fa-fw fa-pen"></i>
+            </a>
+            <a href="/admin/show-admin" class="function_click-back">
+                <i class="fas fa-fw fa-arrow-left"></i>
+            </a>
+        </div>
+    </div>

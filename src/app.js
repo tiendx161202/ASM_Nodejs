@@ -42,6 +42,9 @@ app.engine(
   handlebars.engine({
     extname: "hbs",
     defaultLayout: "main",
+    helpers: {
+      sum:(a,b) => a + b,
+    }
   })
 );
 app.set("view engine", "hbs");

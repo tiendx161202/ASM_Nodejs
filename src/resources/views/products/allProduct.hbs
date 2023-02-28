@@ -1,0 +1,72 @@
+<div class="container_category">
+    <div class="category">
+        <div class="list_category">
+            <li id="li_actives"><a id="category_actives"
+                    href="category.php?iddanhmuc=<?php echo $row_category['category_id'] ?>">
+                </a></li>
+        </div>
+    </div>
+</div>
+
+<div class="all_product">
+    <div class="list_product">
+        <div class="row_product" id="product">
+            <form action="" method="POST">
+                <div class="col_product">
+                    <div class="product_item">
+                        <div class="product_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="product_text">
+                            <h6></h6>
+                            <!-- <input type="hidden" name="product_stock" value="<?php echo $ftech_product['product_stock'] ?>"> -->
+                            <input type="number" name="quanity" min="1" value="1"> KG
+                            <div class="product_price">
+                            </div>
+                        </div>
+
+                        <div class="icon_product">
+                            <input type="hidden" name="id" value="<?php echo $ftech_product['product_id'] ?>">
+                            <input type="hidden" name="product_stock"
+                                value="<?php echo $ftech_product['product_stock'] ?>">
+                            <input type="hidden" name="product_name"
+                                value="<?php echo $ftech_product['product_name'] ?>">
+                            <input type="hidden" name="product_price"
+                                value="<?php echo $ftech_product['product_price'] ?>">
+                            <input type="hidden" name="product_img" value="<?php echo $ftech_product['product_img'] ?>">
+                            <a href="detail_product.php?idsanpham=<?php echo $ftech_product['product_id'] ?>"
+                                class="favorites">Chi tiết</a>
+                            {{!-- <?php
+                                                if ($is_login == true) {
+                                                    echo '<input type="submit" name="add_to_cart" value="Thêm giỏ" class="bi bi-cart-fill cart"> ';
+                                                    header("Location:../../../pages/cart.php");
+                                                }elseif ($is_login == false) {
+                                                    echo '
+                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <input type="submit" name="add_to_cart" value="Thêm giỏ" class="bi bi-cart-fill cart">
+                                                    </a>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Thông Báo</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">Bạn phải đăng nhập để thêm giỏ hàng</div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                                    <a type="button" class="btn btn-primary" href="../pages/login.php" style="background-color: #82ae46;">Đăng Nhập</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>';
+                                                }
+                                            ?> --}}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

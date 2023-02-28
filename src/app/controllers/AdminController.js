@@ -5,16 +5,15 @@ const {
 
 const User = require("../models/User");
 
-
 class AdminController {
   index(req, res) {
     // res.render("admins/home");
-    res.render("admins/login" , {layout: "admin_no_partials"});
+    res.render("admins/login", { layout: "admin_no_partials" });
   }
 
   // [GET] /admin/login (view admin Login Form)
   loginAdmin(req, res) {
-    res.render("admins/login" , {layout: "admin_no_partials"});
+    res.render("admins/login", { layout: "admin_no_partials" });
   }
 
   // [POST] /admin/login
@@ -24,11 +23,15 @@ class AdminController {
 
     // return res.render('admins/login', { layout:'admin_no_partials'},{message : "Tài Khoản Mật Khẩu Không Chính Xác"})
     try {
-      const useradminDB = await User.findOne({username:username });
+      const useradminDB = await User.findOne({ username: username });
       // const roleAdmin = await User.findOne({role : {role_name : "superadmin"}});
       // return res.json(useradminDB.role_name)
-      const stringRole = ["Quản lý","Nhân viên"]
-      if (!useradminDB || useradminDB.password != password || !stringRole.includes(useradminDB.role_name)) {
+      const stringRole = ["Quản lý", "Nhân viên"];
+      if (
+        !useradminDB ||
+        useradminDB.password != password ||
+        !stringRole.includes(useradminDB.role_name)
+      ) {
         return res.render("admins/login", {
           layout: "admin_no_partials",
           message: "Tài Khoản Mật Khẩu Không Chính Xác",
@@ -36,31 +39,23 @@ class AdminController {
       }
 
       req.session.UserAdmin = {
-        _id : useradminDB.id,
-        useradmin : useradminDB.username
-      }
+        _id: useradminDB.id,
+        useradmin: useradminDB.username,
+      };
 
-
-      return res.render("admins/home")
-
+      return res.render("admins/home");
     } catch (err) {
-        return res.json(err);
+      return res.json(err);
     }
-
-   
-
   }
 
-
-
   // [GET] /admins/addAdmin
-  addAdmin(req ,res ){
+  addAdmin(req, res) {
     res.render("admins/addAdmin");
   }
 
-
   // [POST] /admins/addAdmin
-  async addAdminPost(req ,res ){
+  async addAdminPost(req, res) {
     const username = req.body.customer_username;
     const password = req.body.customer_password;
     const rpassword = req.body.customer_rpassword;
@@ -81,7 +76,7 @@ class AdminController {
         !rpassword ||
         !email ||
         !address ||
-        !numberphone 
+        !numberphone
       ) {
         // return res.render("admins/addAdmin", {
         //   err_warning: "Bạn Phải Điền Đầy Đủ Thông Tin.",
@@ -89,7 +84,9 @@ class AdminController {
       }
 
       if (!emailRegexp.test(email)) {
-        return res.render("admins/addAdmin", { email_err: "Email không đúng." });
+        return res.render("admins/addAdmin", {
+          email_err: "Email không đúng.",
+        });
       }
 
       if (!regex.test(numberphone)) {
@@ -152,6 +149,26 @@ class AdminController {
         res.redirect("/admin");
       });
     }
+  }
+
+  // [GET] /admin/show-admin
+  
+  async showAdmin(req, res, next) {
+    const userAdmin = await User.find({
+      $or: [{ role_name: "Quản lý" }, { role_name: "Nhân viên" }],
+    });
+
+    res.render("admins/showAdmin", { users: multipleMongooseToObject(userAdmin) });
+  
+  }
+
+  //[GET] /admin/detail-admin/:username
+  async detailAdmin(req, res, next) {
+    const userAdmin = await User.findOne({username: req.params.username});
+    if(!userAdmin){
+      return res.redirect("/admin/show-admin");
+    }
+    res.render("admins/detailAdmin", { users: mongooseToObject(userAdmin) });
   }
 }
 
