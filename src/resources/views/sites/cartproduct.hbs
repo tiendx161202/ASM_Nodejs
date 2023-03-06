@@ -1,0 +1,62 @@
+<!-- -Cart- -->
+<div class="head_cart">
+    <div class="cart_img"></div>
+    <div class="cart_text">
+        <h1>MY CART</h1>
+        <p>My shopping cart</p>
+    </div>
+</div>
+
+<!-- -List_cart -->
+<div class="table_cart">
+    <table class="table">
+        <thead class="text_center_cart">
+            <tr>
+                <th>STT</th>
+                <th>Hình ảnh</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody class="text_center">
+            <tr>
+                <td></td>
+                <td class="product_img">
+                    <img src="../img/uploads/<?php echo $fetch_cart['product_img']; ?>" alt="">
+                </td>
+                <td class="product_name">
+                    <h5></h5>
+                </td>
+                <td class="product_price">vnđ</td>
+                <td class="product_quanity">
+                    <form action="" method="post">
+                        <input type="hidden" name="update_quantity_id" value="<?php echo $fetch_cart['cart_id']; ?>">
+                        <input type="number" name="update_quantity" min="1"
+                            value="<?php echo $fetch_cart['quanity']; ?>">
+                        <input type="submit" value="Update" name="update_update_btn">
+                    </form>
+                </td>
+                <td class="procduct_total">vnđ</td>
+                <td class="product_remove"><a href="cart.php?remove=<?php echo $fetch_cart['cart_id']; ?>"><i
+                            class="bi bi-x-lg"></i></a></td>
+            </tr>
+
+
+            <tr class="total_money">
+                <th colspan="5">Tổng</th>
+                <th>vnđ</th>
+                <th></th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="button_cart">
+    <a href="cart.php?delete_all"> Xóa toàn bộ khỏi giỏ hàng</a>
+    <a href="../pages/search.php"> Thêm sản phẩm vào giỏ hàng</a>
+    <a href="../pages/pay.php"> Thanh toán</a>
+</div>

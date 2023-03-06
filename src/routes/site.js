@@ -3,6 +3,7 @@ const router = express.Router();
 const siteRouter = require("../app/controllers/SiteController");
 
 
+router.get("/cart",siteRouter.showCart);
 router.get("/lien-he",siteRouter.contact);
 router.post("/register",siteRouter.registerPost);
 router.get("/register",siteRouter.register);

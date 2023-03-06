@@ -155,8 +155,14 @@ class SiteController {
     }
   }
 
+  // [GET] /lien-he
   contact(req, res, next) {
     res.render("sites/contact")
+  }
+
+  // [GET] /cart
+  showCart(req, res, next) {
+    return res.render("sites/cartproduct");
   }
 
   
