@@ -168,7 +168,7 @@ class AdminController {
     if(!userAdmin){
       return res.redirect("/admin/show-admin");
     }
-    res.render("admins/detailAdmin", { users: mongooseToObject(userAdmin) });
+    res.render("admins/detailAdmin", { users: multipleMongooseToObject(userAdmin) });
   }
 }
 

@@ -108,7 +108,6 @@ class SiteController {
   // [GET] /login
 
   login(req, res) {
-    
     res.render("sites/login");
   }
 

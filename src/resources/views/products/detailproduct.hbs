@@ -1,0 +1,302 @@
+<!-- Product_detail -->
+<div class="product_detail">
+    <h2>Chi tiết sản phẩm</h2>
+    <form action="" method="POST">
+
+        <div class="product_content">
+            {{#with products}}
+
+            <div class="product_img">
+                <div class="product_img_item">
+                    <img src="{{this.product_img}}" width="100%" alt="" id="product_img">
+                </div>
+            </div>
+
+            <div class="product_content_text">
+                <div class="product_text">
+                    <h5>Tên sản phẩm:{{this.product_name}}</h5>
+
+                    {{!-- <p>Mã sản phẩm:
+                        <?php echo $row_chitiet['product_id']; ?>
+                    </p> --}}
+                    <p>Số lượng: <input type="number" name="quanity" min="1" value="1"> KG
+                    <p>Danh mục:
+                    </p>
+                    <p>Giá:
+                        {{this.product_price}}
+                    </p>
+                    <p>
+                        {{this.product_info}}
+                    </p>
+                </div>
+
+                <div class="product_text_btn">
+                    <a><i class="bi bi-heart"></i>Yêu Thích</a>
+                    {{#if users}}
+                    <input type="submit" name="add_to_cart" value="Thêm giỏ" class="bi bi-cart-fill cart">
+                    {{else}}
+                    <a class="a_product_details" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <input type="submit" name="add_to_cart" value="Thêm giỏ"
+                            class="bi bi-cart-fill cart_product_details">
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal" tabindex="-1" id="exampleModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Modal body text goes here.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{!--
+                    <?php
+                            if ($is_login == true) {
+                                echo '<input type="submit" name="add_to_cart" value="Thêm giỏ" > ';
+                                header("Location:../../all_product.php");
+                            } elseif ($is_login == false) {
+                                echo '
+                                    <a class="a_product_details" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <input type="submit" name="add_to_cart" value="Thêm giỏ" class="bi bi-cart-fill cart_product_details">
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Thông Báo</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">Bạn phải đăng nhập để thêm giỏ hàng</div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                    <a type="button" class="btn btn-primary" href="../../pages/main/login.php" style="background-color: #82ae46;">Đăng Nhập</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>';
+                            }
+                            ?> --}}
+                </div>
+
+                <div class="sharing">
+                    <h6>Sharing</h6>
+                    <i class="bi bi-facebook"></i>
+                    <i class="bi bi-messenger"></i>
+                    <i class="bi bi-envelope-fill"></i>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="lines"></div>
+
+<!-- Product_information -->
+<div class="product_information">
+    <h2>Thông tin sản phẩm</h2>
+
+    <div class="product_information_text">
+        <p>
+            {{this.product_content}}
+        </p>
+    </div>
+</div>
+{{/with}}
+
+
+<div class="lines"></div>
+
+<!-- Customer_review -->
+<div class="customer_review">
+    <h2>Đánh giá của khách hàng</h2>
+
+    <div class="customer_content">
+        <div class="customer_img">
+            <img src="../../img/img_customer/customer2.jpg" alt="">
+        </div>
+
+        <div class="customer_comment">
+            <div class="customer_name">
+                Dang Xuan Tien
+            </div>
+
+            <div class="customer_star">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+            </div>
+
+            <div class="customer_comm">
+                “Trái cây rất ngon và sạch, tôi sẽ mua nhiều hơn trong tương lai”
+            </div>
+        </div>
+    </div>
+
+    <div class="customer_content">
+        <div class="customer_img">
+            <img src="../../img/img_customer/customer3.jpg" alt="">
+        </div>
+
+        <div class="customer_comment">
+            <div class="customer_name">
+                Doan Cong Vu
+            </div>
+
+            <div class="customer_star">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+            </div>
+
+            <div class="customer_comm">
+                “Tư vấn nhiệt tình, chu đáo, vận chuyển nhanh”
+            </div>
+        </div>
+    </div>
+
+    <div class="customer_content">
+        <div class="customer_img">
+            <img src="../../img/img_customer/customer4.jpg" alt="">
+        </div>
+
+        <div class="customer_comment">
+            <div class="customer_name">
+                Giang
+            </div>
+
+            <div class="customer_star">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+            </div>
+
+            <div class="customer_comm">
+                “Very good”
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="lines"></div>
+
+<!-- -related_products -->
+<div class="related_product">
+    <h2>Related Product</h2>
+    <div class="btn_related">
+        <i class="bi bi-arrow-left-circle" id="btn_related_left"></i>
+        <i class="bi bi-arrow-right-circle" id="btn_related_right"></i>
+    </div>
+
+    <div class="related_product_item">
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+        <div class="related_content">
+            <div class="related_img">
+                <img src="../img/img_item/item1.jpg" alt="">
+            </div>
+            <div class="related_text">
+                <h6>BELL PEPPER</h6>
+                <div class="related_price">$4.90</div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
