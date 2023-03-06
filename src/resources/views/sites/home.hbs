@@ -91,28 +91,84 @@
         </div>
         <div class="all_product">
             <div class="list_product">
-                <div class="row_product" id="product">
-                    {{#each products}}
-                    <div class="col_product">
-                        <div class="product_item">
-                            <div class="product_img">
-                                <img src="{{this.product_img}}" alt="">
+        <div class="row_product" id="product">
+            {{!-- <form action="" method="POST"> --}}
+                {{#each products}}
+                <div class="col_product">
+                    <div class="product_item">
+                        <div class="product_img">
+                            <img src="{{this.product_img}}" alt="">
+                        </div>
+                        <div class="product_text" style="text-align: center !important;">
+                            <h6>{{this.product_name}}</h6>
+                            <input id="quanity_product" type="number" name="quanity" min="1" value="1"
+                                style="width : 35px ; margin-bottom:15px"> KG
+                            <div class="product_price">
+                                {{this.product_price}}
                             </div>
-                            <div class="text_product">
-                                <h6>{{this.product_name}}</h6>
-                                <input style="width : 35px ; margin-bottom:15px" type="number" name="quanity" min="1" value="1"> KG
-                                <div class="price">{{this.product_price}} vnd</div>
+                        </div>
+
+
+                        <div class="icon_product">
+                            <a href="/san-pham/detail-product/{{this.product_name}}" class="favorites">Chi tiết</a>
+                            <button class="btn_button" data-bs-toggle="modal" data-bs-target="#id_modal_1" data-product-id="{{this._id}}">
+                                Thêm Giỏ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+
+                {{#if session.User}}
+                <!-- Modal -->
+                <div class="modal" tabindex="-1" id="id_modal_1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Xác Nhận Thêm Giỏ Hàng</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
-                            <div class="icon_product">
-                                <input type="submit" name="addcart" value="Chi tiết" class="bi bi-cart-fill cart" class="bi bi-heart-fill favorites">
-                                <input type="submit" name="add_to_cart" value="Thêm giỏ" class="bi bi-cart-fill cart">
+                            <div class="modal-body">
+                                <p>Bạn Có Muốn Thêm Sản Phẩm Vào Giỏ Hàng ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button class="btn" id="btn_id_">Xác Nhận</button>
                             </div>
                         </div>
                     </div>
-                    {{/each}}
-                    
                 </div>
-            </div>
+                {{else}}
+                <!-- Modal -->
+                <div class="modal" tabindex="-1" id="id_modal_1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Bạn Chưa Đăng Nhập</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Hãy Đăng Nhập Để Thêm Sản Phẩm</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a href="/login" class="btn">
+                                    Đăng Nhập
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+                {{!--
+            </form> --}}
+
+
+        </div>
+    </div>
         </div>
     </div>
 
@@ -123,3 +179,40 @@
     <!-- -End Vegetable- -->
 
     <div class="lines"></div>
+
+    <script>
+    let modal = document.getElementById('id_modal_1');
+
+    modal.addEventListener('show.bs.modal', function (e) {
+        let _id = e.relatedTarget.getAttribute('data-product-id');
+        let button = document.createElement("button");
+
+        let onclickFun = "submitData('" + _id + "')";
+
+        button.setAttribute("id", "btn_id_");
+        button.setAttribute("onclick", onclickFun);
+        button.classList.add("btn", "btn-primary");
+        button.textContent = "Xác Nhận";
+
+        document.getElementById("btn_id_").remove();
+
+        e.target.querySelector('.modal-footer').appendChild(button);
+
+    })
+
+
+    function submitData(_id) {
+        let form = document.createElement("form");
+        form.setAttribute("action", "/san-pham");
+        form.setAttribute("method", "Post");
+        form.setAttribute("style", "display: none");
+        let id = document.createElement("input");
+        id.setAttribute("name", "_id");
+        id.value = _id;
+        let quanity = document.getElementById("quanity_product");
+        form.appendChild(quanity);
+        form.appendChild(id);
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>

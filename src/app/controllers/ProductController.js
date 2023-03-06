@@ -78,20 +78,19 @@ class ProductController {
       // })
 
       Cart.insertMany(cart);
-      console.log(cart);
     } 
     else{
-      let quanityDB = product_cart.quanity;
-      let quanityNew = number_quanity + quanityDB;
+      const quanityDB = await Cart.find({products:{quanity:quanity}});
+      // let quanityNew = number_quanity + quanityDB;
       let productIncart = {
         product_id: product_cart._id,
         name: product_cart.product_name,
-        quanity: quanityNew,
+        quanity: number_quanity,
         unit_price: product_cart.product_price,
         // total_price: product_cart.product_price * number_quanity,
         img: product_cart.product_img,
       };
-
+      console.log(quanityDB);
       cartFound.products.push(productIncart);
       cartFound.save();
     }

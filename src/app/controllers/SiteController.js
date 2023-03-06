@@ -155,6 +155,10 @@ class SiteController {
     }
   }
 
+  contact(req, res, next) {
+    res.render("sites/contact")
+  }
+
   
 }
 
