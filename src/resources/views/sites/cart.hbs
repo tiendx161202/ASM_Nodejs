@@ -7,7 +7,14 @@
     </div>
 </div>
 
+<div class="message_cart">
+    {{#if message_cart}}
+    <h3>{{message_cart}}</h3>
+    {{/if}}
+</div>
+
 <!-- -List_cart -->
+
 <div class="table_cart">
     <table class="table">
         <thead class="text_center_cart">
@@ -23,20 +30,22 @@
         </thead>
 
         <tbody class="text_center">
+            {{#if carts}}
+
             <tr>
-                <td></td>
+                <td>{{sum @index 1}}</td>
                 <td class="product_img">
-                    <img src="../img/uploads/<?php echo $fetch_cart['product_img']; ?>" alt="">
+                    <img src="" alt="">
                 </td>
+                {{}}
                 <td class="product_name">
-                    <h5></h5>
+                    <h5>{{}}</h5>
                 </td>
                 <td class="product_price">vnđ</td>
                 <td class="product_quanity">
                     <form action="" method="post">
-                        <input type="hidden" name="update_quantity_id" value="<?php echo $fetch_cart['cart_id']; ?>">
                         <input type="number" name="update_quantity" min="1"
-                            value="<?php echo $fetch_cart['quanity']; ?>">
+                            value="">
                         <input type="submit" value="Update" name="update_update_btn">
                     </form>
                 </td>
@@ -45,12 +54,14 @@
                             class="bi bi-x-lg"></i></a></td>
             </tr>
 
+            {{/if}}
 
             <tr class="total_money">
                 <th colspan="5">Tổng</th>
                 <th>vnđ</th>
                 <th></th>
             </tr>
+
         </tbody>
     </table>
 </div>

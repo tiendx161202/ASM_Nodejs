@@ -1,5 +1,6 @@
 const Product = require("../models/Product");
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 
 const {
   mongooseToObject,
@@ -161,8 +162,15 @@ class SiteController {
   }
 
   // [GET] /cart
-  showCart(req, res, next) {
-    return res.render("sites/cartproduct");
+  async showCart(req, res, next) {
+    const cartProduct = await Cart.findOne({})
+    if(!cartProduct){
+      return res.render("sites/cart",{message_cart:"Không Có Sản Phẩm"});
+    }
+    else{
+      return res.render("sites/cart",{carts:mongooseToObject(cartProduct)});
+
+    }
   }
 
   

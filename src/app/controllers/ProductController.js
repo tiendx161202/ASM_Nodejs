@@ -31,7 +31,6 @@ class ProductController {
       products: mongooseToObject(nameProduct),
     });
   }
-  
 
   // [POST] /san-pham/allproduct (_id , quanity)
   async addProductToCart(req, res, next) {
@@ -71,31 +70,37 @@ class ProductController {
         products: products,
         status_cart: "Chưa Thanh Toán",
       };
-
       // let total_price_cart = 0;
 
       // productIncart.forEach(function(p){
       //   total_price_cart += p.quanity*unit_price;
       // })
-
       Cart.insertMany(cart);
-    } 
-    else{
-      const quanityDB = await Cart.find({products:{quanity:quanity}});
-      // let quanityNew = number_quanity + quanityDB;
-      let productIncart = {
-        product_id: product_cart._id,
-        name: product_cart.product_name,
-        quanity: number_quanity,
-        unit_price: product_cart.product_price,
-        // total_price: product_cart.product_price * number_quanity,
-        img: product_cart.product_img,
-      };
-      console.log(quanityDB);
-      cartFound.products.push(productIncart);
+    } else {
+      // console.log(_id);
+      let tontai = false;
+      cartFound.products.forEach(function (p) {
+        if (_id == p.product_id) {
+          tontai = true;
+          p.quanity += number_quanity;
+        }
+      });
+
+      if (!tontai) {
+        let productIncart = {
+          product_id: product_cart._id,
+          name: product_cart.product_name,
+          quanity: number_quanity,
+          unit_price: product_cart.product_price,
+          // total_price: product_cart.product_price * number_quanity,
+          img: product_cart.product_img,
+        };
+        cartFound.products.push(productIncart);
+      }
+
       cartFound.save();
     }
-    return res.redirect("/san-pham")
+    return res.redirect("/san-pham");
   }
 }
 
