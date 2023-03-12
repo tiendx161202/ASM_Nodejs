@@ -98,6 +98,7 @@ class SiteController {
         email: email,
         address: address,
         numberphone: numberphone,
+        role_name : "member"
       });
       return res.render("sites/register", {
         message: "Đăng ký thành công",
@@ -119,7 +120,7 @@ class SiteController {
     const password = req.body.password;
 
     try {
-      const userDB = await User.findOne({ username: username});
+      const userDB = await User.findOne({ username: username });
       if (!userDB) {
         return res.render("sites/login", {
           login_usererr: "Tên Đăng Nhập Không Tồn Tại.",
@@ -158,22 +159,41 @@ class SiteController {
 
   // [GET] /lien-he
   contact(req, res, next) {
-    res.render("sites/contact")
+    res.render("sites/contact");
   }
 
   // [GET] /cart
   async showCart(req, res, next) {
-    const cartProduct = await Cart.findOne({})
-    if(!cartProduct){
-      return res.render("sites/cart",{message_cart:"Không Có Sản Phẩm"});
-    }
-    else{
-      return res.render("sites/cart",{carts:mongooseToObject(cartProduct)});
+    const cartProduct = await Cart.findOne({
+      "user.user_id": req.session.User._id,
+    });
+    if (!cartProduct) {
+      return res.render("sites/cart", { message_cart: "Không Có Sản Phẩm" });
+    } else {
+      let total_price = 0;
+      // let thanhtien = 0;
+      cartProduct.products.forEach(function (product) {
+        total_price += product.quanity * product.unit_price;
+      });
 
+      // cartProduct.products.forEach(function (product) {
+      //   thanhtien = product.quanity * product.unit_price;
+      //   Object.assign(product,{
+      //     thanhtien : thanhtien
+      //   })
+      //   console.log(thanhtien);
+      // });
+
+      return res.render("sites/cart", { cart: mongooseToObject(cartProduct),total_price : total_price});
     }
   }
 
-  
+  // [DELETE] /:id
+  deleteProductCart(req,res,next){
+    Cart.deleteOne({_id:req.params.id})
+        .then(()=> res.redirect('back'))
+        .catch(next);
+  }
 }
 
 module.exports = new SiteController();

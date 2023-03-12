@@ -4,6 +4,7 @@ const {
 } = require("../../util/mongoose");
 
 const User = require("../models/User");
+const Category = require("../models/Category")
 
 class AdminController {
   index(req, res) {
@@ -169,6 +170,19 @@ class AdminController {
       return res.redirect("/admin/show-admin");
     }
     res.render("admins/detailAdmin", { users: multipleMongooseToObject(userAdmin) });
+  }
+
+  // [GET] /admin/addCategory
+  addCategory(req, res, next) {
+    res.render("admins/sites/addCategory");
+  }
+
+  // [POST] /admin/addCategoryPost
+  async addCategoryPost(req, res, next) {
+    const category = new Category(req.body);
+    category.save()
+        .then(() => res.render("admins/sites/addCategory" ,{} ))
+        .catch(next);
   }
 }
 

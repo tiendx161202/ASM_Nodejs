@@ -30,35 +30,34 @@
         </thead>
 
         <tbody class="text_center">
-            {{#if carts}}
+            {{#each cart.products}}
+
 
             <tr>
                 <td>{{sum @index 1}}</td>
-                <td class="product_img">
-                    <img src="" alt="">
+                <td class="product_img_cart">
+                    <img src="{{this.img}}" alt="{{this.name}}">
                 </td>
-                {{}}
                 <td class="product_name">
-                    <h5>{{}}</h5>
+                    <h5>{{this.name}}</h5>
                 </td>
-                <td class="product_price">vnđ</td>
+                <td class="product_price">{{this.unit_price}}vnđ</td>
                 <td class="product_quanity">
                     <form action="" method="post">
-                        <input type="number" name="update_quantity" min="1"
-                            value="">
+                        <input type="number" name="update_quantity" min="1" value="{{this.quanity}}">
                         <input type="submit" value="Update" name="update_update_btn">
                     </form>
                 </td>
-                <td class="procduct_total">vnđ</td>
-                <td class="product_remove"><a href="cart.php?remove=<?php echo $fetch_cart['cart_id']; ?>"><i
-                            class="bi bi-x-lg"></i></a></td>
+                <td class="procduct_total">{{multiple this.quanity this.unit_price}} vnđ</td>
+                <td class="product_remove"><a href="" data-bs-toggle="modal" data-bs-target="#delete_product_cart"
+                        data-id="{{this._id}}"><i class="bi bi-x-lg"></i></a></td>
             </tr>
 
-            {{/if}}
+            {{/each}}
 
             <tr class="total_money">
                 <th colspan="5">Tổng</th>
-                <th>vnđ</th>
+                <th>{{total_price}} vnđ</th>
                 <th></th>
             </tr>
 
@@ -67,7 +66,54 @@
 </div>
 
 <div class="button_cart">
-    <a href="cart.php?delete_all"> Xóa toàn bộ khỏi giỏ hàng</a>
-    <a href="../pages/search.php"> Thêm sản phẩm vào giỏ hàng</a>
-    <a href="../pages/pay.php"> Thanh toán</a>
+    {{!-- <a href="cart.php?delete_all"> Xóa toàn bộ khỏi giỏ hàng</a> --}}
+    <a href=""> Thêm sản phẩm vào giỏ hàng</a>
+    <a href=""> Thanh toán</a>
 </div>
+
+{{!-- Confirm delete product cart --}}
+<!-- Modal -->
+<div class="modal fade" id="delete_product_cart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông Báo Xóa Sản Phẩm</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa sản phẩm ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button id="btn-delete-product-cart" type="button" class="btn btn-danger">Xóa bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Delete hidden from --}}
+<form name="delete-from" method="post"></form>
+
+<script>
+    let deleteFrom = document.forms['delete-from'];
+    // When dialog confirm clicked
+    let btnDeleteProductCart = document.getElementById("btn-delete-product-cart");
+    let delete_product_cart = document.getElementById("delete_product_cart");
+    delete_product_cart.addEventListener('show.bs.modal', function (e) {
+        let _id = e.relatedTarget.getAttribute("data-id");
+        let button = document.createElement("button");
+
+        btnDeleteProductCart.onclick = function () {
+            deleteFrom.action = _id + '?_method=DELETE';
+            deleteFrom.submit();
+        }
+
+        //let onclickFun = "submitData('" + _id +"')";
+        //button.setAttribute("id" , "btn-delete-product-cart");
+        //button.setAttribute("onclick", onclickFun);
+        // button.textContent = "Xóa bỏ";
+        //e.target.querySelector('.modal-footer').appendChild(button);
+    })
+
+
+</script>

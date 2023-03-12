@@ -3,6 +3,8 @@ const router = express.Router();
 const adminRouter = require("../app/controllers/AdminController");
 
 router.get("/detail-admin/:username", adminRouter.detailAdmin);
+router.get("/addCategory", adminRouter.addCategory);
+router.post("/addCategoryPost", adminRouter.addCategoryPost);
 router.get("/detail-admin", adminRouter.detailAdmin);
 router.get("/show-admin", adminRouter.showAdmin);
 router.get("/login", adminRouter.loginAdmin);

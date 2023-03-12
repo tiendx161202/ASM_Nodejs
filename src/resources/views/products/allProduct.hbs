@@ -1,12 +1,24 @@
+<div>
+    {{#if error_quanity}}
+    <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{this.error_quanity}}
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    {{/if}}
+</div>
+
 <div class="container_category">
     <div class="category">
-        {{#each categories}}
         <div class="list_category">
-            <li id="li_actives"><a id="category_actives" href="">
-                    {{this.categori_name}}
-                </a></li>
-        </div>
+        {{#each categories}}
+
+            <li id="li_actives"><a id="category_actives" href="">{{this.categoryname}}</a></li>
         {{/each}}
+        </div>
     </div>
 </div>
 
@@ -22,7 +34,7 @@
                         </div>
                         <div class="product_text" style="text-align: center !important;">
                             <h6>{{this.product_name}}</h6>
-                            <input id="quanity_product" type="number" name="quanity" min="1" value="1"
+                            <input id="quanity_product_{{this._id}}" type="number" name="quanity" value="1"
                                 style="width : 35px ; margin-bottom:15px"> KG
                             <div class="product_price">
                                 {{this.product_price}}
@@ -32,7 +44,8 @@
 
                         <div class="icon_product">
                             <a href="/san-pham/detail-product/{{this.product_name}}" class="favorites">Chi tiết</a>
-                            <button class="btn_button" data-bs-toggle="modal" data-bs-target="#id_modal_1" data-product-id="{{this._id}}">
+                            <button class="btn_button" data-bs-toggle="modal" data-bs-target="#id_modal_1"
+                                data-product-id="{{this._id}}">
                                 Thêm Giỏ
                             </button>
                         </div>
@@ -121,7 +134,7 @@
         let id = document.createElement("input");
         id.setAttribute("name", "_id");
         id.value = _id;
-        let quanity = document.getElementById("quanity_product");
+        let quanity = document.getElementById(`quanity_product_${_id}`);
         form.appendChild(quanity);
         form.appendChild(id);
         document.body.appendChild(form);

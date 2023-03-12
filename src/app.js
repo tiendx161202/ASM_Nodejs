@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require("express");
+const methodOverride = require("method-override");
 const handlebars = require("express-handlebars");
 const app = express();
 const port = 8080;
@@ -30,6 +31,9 @@ app.use(
   })
 );
 
+// methodOverride 
+app.use(methodOverride('_method'))
+
 app.use(function (req, res, next) {
   res.locals.session = req.session;
   next();
@@ -44,6 +48,7 @@ app.engine(
     defaultLayout: "main",
     helpers: {
       sum:(a,b) => a + b,
+      multiple:(a,b) => a * b 
     }
   })
 );

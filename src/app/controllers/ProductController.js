@@ -1,4 +1,4 @@
-const Category = require("../models/Categorie");
+const Category = require("../models/Category")
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
 const User = require("../models/User");
@@ -48,6 +48,11 @@ class ProductController {
       status_cart: "Chưa Thanh Toán",
     });
 
+    if (product_cart.product_stock < number_quanity) {
+      res.render("products/allProduct", {
+        error_quanity: `Số lượng trong cửa hàng còn : ${product_cart.product_stock} KG`,
+      });
+    }
     if (!cartFound) {
       let products = [];
       let productIncart = {
@@ -70,11 +75,8 @@ class ProductController {
         products: products,
         status_cart: "Chưa Thanh Toán",
       };
-      // let total_price_cart = 0;
-
-      // productIncart.forEach(function(p){
-      //   total_price_cart += p.quanity*unit_price;
-      // })
+      product_cart.product_stock -= number_quanity;
+      product_cart.save();
       Cart.insertMany(cart);
     } else {
       // console.log(_id);
@@ -85,6 +87,8 @@ class ProductController {
           p.quanity += number_quanity;
         }
       });
+      product_cart.product_stock -= number_quanity;
+      product_cart.save();
 
       if (!tontai) {
         let productIncart = {
@@ -95,12 +99,14 @@ class ProductController {
           // total_price: product_cart.product_price * number_quanity,
           img: product_cart.product_img,
         };
+        // product_cart.product_stock -= number_quanity;
+        // product_cart.save();
         cartFound.products.push(productIncart);
       }
-
       cartFound.save();
     }
     return res.redirect("/san-pham");
+    // return res.render("products/allProduct");
   }
 }
 
