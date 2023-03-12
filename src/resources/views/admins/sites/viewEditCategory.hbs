@@ -1,7 +1,7 @@
 <div>
-    {{#if message_category}}
+    {{#if message}}
     <div class="alert alert-success text-center" role="alert">
-        {{message_category}}
+        {{message}}
     </div>
     {{/if}}
 </div>
@@ -9,23 +9,27 @@
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-add-edit" id="dataTable" width="100%" cellspacing="0">
-            <form method="post" action="/admin/addCategory" autocomplete="off">
+            <form method="post" action="/admin/edit-category/{{categories._id}}?_method=PUT">
                 <thead>
+
                     <tr>
                         <td>Tên danh mục</td>
-                        <td><input type="text" name="categoryname" placeholder="Nhập để thêm" class="category-input">
+                        {{#if categories}}
+                        <td><input type="text" name="categoryname" value="{{categories.categoryname}}" class="add-edit-input">
                         </td>
+                        {{/if}}
                     </tr>
                     <tr>
                         <td colspan="2">
                             <div class="function_click">
-                                <input type="submit" value="Thêm danh mục sản phẩm" class="add-edit-submit">
+                                <input type="submit" value="Cập nhập" class="add-edit-submit">
                                 <a href="/admin/listCategory" class="function_click-back">
                                     <i class="fas fa-fw fa-arrow-left"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
+
                 </thead>
             </form>
         </table>

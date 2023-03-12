@@ -1,0 +1,46 @@
+
+
+<div class="card-body">
+    <div class="table-responsive">
+        <div class="container-add-right">
+            <div class="container-add">
+                <a href="/admin/addCategory" class="container-add-click">Add</a>
+            </div>
+        </div>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Danh mục</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each categories}}
+
+                <tr>
+                    <td width="5%" align="center">{{sum @index 1}}</td>
+                    <td>
+                        <p class="td-name">{{this.categoryname}}</p>
+                    </td>
+
+                    <td width="15%">
+                        <div class="function_click">
+                            <a href="/admin/viewEditCategory/{{this._id}}" class="function_click-edit">
+                                <i class="fas fa-fw fa-pen"></i>
+                            </a>
+                            <a href="/delete-category/{{this._id}}" class="function_click-delete">
+                                <i class="fas fa-fw fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -79,9 +79,9 @@ class AdminController {
         !address ||
         !numberphone
       ) {
-        // return res.render("admins/addAdmin", {
-        //   err_warning: "Bạn Phải Điền Đầy Đủ Thông Tin.",
-        // });
+        return res.render("admins/addAdmin", {
+          err_warning: "Bạn Phải Điền Đầy Đủ Thông Tin.",
+        });
       }
 
       if (!emailRegexp.test(email)) {
@@ -169,7 +169,7 @@ class AdminController {
     if(!userAdmin){
       return res.redirect("/admin/show-admin");
     }
-    res.render("admins/detailAdmin", { users: multipleMongooseToObject(userAdmin) });
+    res.render("admins/detailAdmin", { users: mongooseToObject(userAdmin) });
   }
 
   // [GET] /admin/addCategory
@@ -181,7 +181,27 @@ class AdminController {
   async addCategoryPost(req, res, next) {
     const category = new Category(req.body);
     category.save()
-        .then(() => res.render("admins/sites/addCategory" ,{} ))
+        .then(() => res.render("admins/sites/addCategory" , {message_category : "Thêm danh mục sản phẩm thành công"} ))
+        .catch(next);
+  }
+
+  // [GET] /admin/listCategory
+  async listCategory(req, res, next) {
+    const listCategory = await Category.find({});
+    return res.render("admins/sites/listCategory" , {categories : multipleMongooseToObject(listCategory)})
+  }
+
+  //[GET] /admin/viewEditCategory
+  async viewEditCategory(req, res,next) {
+    const categoryId = await Category.findOne({id: req.params._id})
+    return res.render("admins/sites/viewEditCategory" , 
+    {categories : mongooseToObject(categoryId)}
+    )
+  }
+  // [PUT] /edit-category/:id
+  editCategory(req, res , next) {
+    Category.updateOne({_id : req.params.id} , req.body)
+        .then(() => res.render("admins/sites/viewEditCategory" , {message:"Cập nhập tên danh mục thành công !"}))
         .catch(next);
   }
 }
