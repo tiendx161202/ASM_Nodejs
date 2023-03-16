@@ -2,14 +2,17 @@ const express = require("express");
 const router = express.Router();
 const adminRouter = require("../app/controllers/AdminController");
 
+// Show view addPRoduct in admin
+router.get("/addProduct" , adminRouter.addProduct);
+router.post("/addProduct" , adminRouter.addProductPost);
 
+// Delete category
+router.delete("/delete-category/:id", adminRouter.deleteCategory);
 // View and function edit category in admin
 router.get("/viewEditCategory/:id", adminRouter.viewEditCategory);
 router.put("/edit-category/:id", adminRouter.editCategory);
-
 // show all list category
 router.get("/listCategory", adminRouter.listCategory);
-
 // view and function add category in admin
 router.get("/addCategory", adminRouter.addCategory);
 router.post("/addCategory", adminRouter.addCategoryPost);

@@ -4,7 +4,8 @@ const {
 } = require("../../util/mongoose");
 
 const User = require("../models/User");
-const Category = require("../models/Category")
+const Category = require("../models/Category");
+const Product = require("../models/Product");
 
 class AdminController {
   index(req, res) {
@@ -153,20 +154,21 @@ class AdminController {
   }
 
   // [GET] /admin/show-admin
-  
+
   async showAdmin(req, res, next) {
     const userAdmin = await User.find({
       $or: [{ role_name: "Quản lý" }, { role_name: "Nhân viên" }],
     });
 
-    res.render("admins/showAdmin", { users: multipleMongooseToObject(userAdmin) });
-  
+    res.render("admins/showAdmin", {
+      users: multipleMongooseToObject(userAdmin),
+    });
   }
 
   //[GET] /admin/detail-admin/:username
   async detailAdmin(req, res, next) {
-    const userAdmin = await User.findOne({username: req.params.username});
-    if(!userAdmin){
+    const userAdmin = await User.findOne({ username: req.params.username });
+    if (!userAdmin) {
       return res.redirect("/admin/show-admin");
     }
     res.render("admins/detailAdmin", { users: mongooseToObject(userAdmin) });
@@ -180,29 +182,112 @@ class AdminController {
   // [POST] /admin/addCategoryPost
   async addCategoryPost(req, res, next) {
     const category = new Category(req.body);
-    category.save()
-        .then(() => res.render("admins/sites/addCategory" , {message_category : "Thêm danh mục sản phẩm thành công"} ))
-        .catch(next);
+    category
+      .save()
+      .then(() =>
+        res.render("admins/sites/addCategory", {
+          message_category: "Thêm danh mục sản phẩm thành công",
+        })
+      )
+      .catch(next);
   }
 
   // [GET] /admin/listCategory
   async listCategory(req, res, next) {
     const listCategory = await Category.find({});
-    return res.render("admins/sites/listCategory" , {categories : multipleMongooseToObject(listCategory)})
+    return res.render("admins/sites/listCategory", {
+      categories: multipleMongooseToObject(listCategory),
+    });
   }
 
   //[GET] /admin/viewEditCategory
-  async viewEditCategory(req, res,next) {
-    const categoryId = await Category.findOne({id: req.params._id})
-    return res.render("admins/sites/viewEditCategory" , 
-    {categories : mongooseToObject(categoryId)}
-    )
+  async viewEditCategory(req, res, next) {
+    const categoryId = await Category.findOne({ id: req.params._id });
+    return res.render("admins/sites/viewEditCategory", {
+      categories: mongooseToObject(categoryId),
+    });
   }
   // [PUT] /edit-category/:id
-  editCategory(req, res , next) {
-    Category.updateOne({_id : req.params.id} , req.body)
-        .then(() => res.render("admins/sites/viewEditCategory" , {message:"Cập nhập tên danh mục thành công !"}))
-        .catch(next);
+  editCategory(req, res, next) {
+    Category.updateOne({ _id: req.params.id }, req.body)
+      .then(() =>
+        res.render("admins/sites/viewEditCategory", {
+          message: "Cập nhập tên danh mục thành công !",
+        })
+      )
+      .catch(next);
+  }
+
+  // [DELETE] /delete-category/:id
+  deleteCategory(req, res, next) {
+    Category.deleteOne({ _id: req.params.id })
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
+
+  // [GET] /admin/addProduct
+  addProduct(req, res, next) {
+    return res.render("admins/sites/addProduct");
+  }
+
+  // [POST] /admin/addProduct
+  addProductPost(req, res, next) {
+    const product_name = req.body.product_name;
+    // const product_img = req.body.product_img;
+    // const categoryname = req.body.categoryname;
+    let product_price = req.body.product_price;
+    const product_stock = req.body.product_stock;
+    const product_content = req.body.product_content;
+    const product_info = req.body.product_info;
+    const product_status = req.body.product_status;
+    let number_productPrice = Number(product_price);
+    let number_stock = Number(product_stock);
+    const { product_img } = req.files;
+
+     // If does not have image mime type prevent from uploading
+     if (/^product_img/.test(product_img.mimetype)) return res.sendStatus(400);
+
+    if (
+      !product_name ||
+      !product_img ||
+      !product_stock ||
+      // !categoryname ||
+      !product_price ||
+      !product_stock ||
+      !product_status ||
+      !product_content
+    ) {
+      return res.render("admins/sites/addProduct", {
+        err_message: "Bạn phải đăng nhập đầy đủ thông tin !",
+      });
+    }
+
+    if (!number_productPrice || isNaN(number_productPrice)) {
+      return res.render("admins/sites/addProduct", {
+        error: "Giá tiền phải điền số",
+      });
+    }
+
+    if (isNaN(number_stock) || !number_stock){
+      return res.render("admins/sites/addProduct", {
+        error: "Số Lượng phải điền số",
+      });
+    }
+
+    // Move the uploaded image to our upload folder
+    product_img.mv(__dirname + '/upload/' + product_img.name);
+
+    Product.create({
+      product_name : product_name,
+      product_img : product_img.name,
+      product_price : number_productPrice,
+      product_stock : number_stock,
+      product_info : product_info,
+      product_content : product_content,
+      product_status : product_status,
+    })
+
+    return res.render("admins/sites/addProduct",{message : "Thêm sản phẩm thành công !"})
   }
 }
 

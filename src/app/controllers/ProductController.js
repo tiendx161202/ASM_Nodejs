@@ -49,7 +49,7 @@ class ProductController {
     });
 
     if (product_cart.product_stock < number_quanity) {
-      res.render("products/allProduct", {
+       return res.render("products/allProduct", {
         error_quanity: `Số lượng trong cửa hàng còn : ${product_cart.product_stock} KG`,
       });
     }

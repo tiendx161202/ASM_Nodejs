@@ -1,0 +1,94 @@
+<div>
+    {{#if message}}
+    <div class="alert alert-success text-center" role="alert">
+        {{message}}
+    </div>
+    {{/if}}
+</div>
+
+<div>
+    {{#if err_message}}
+    <div class="alert alert-warning text-center" role="alert">
+        {{err_message}}
+    </div>
+    {{/if}}
+</div>
+
+<div>
+    {{#if error}}
+    <div class="alert alert-warning text-center" role="alert">
+        {{error}}
+    </div>
+    {{/if}}
+</div>
+
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-add-edit" id="dataTable" width="100%" cellspacing="0">
+            <form method="POST" action="/admin/addProduct" enctype="multipart/form-data">
+                <thead>
+                    <tr>
+                        <td>Tên sản phẩm</td>
+                        <td><input type="text" name="product_name" class="add-edit-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Hình ảnh</td>
+                        <td><input type="file" name="product_img" class="add-edit-input" accept="image/*"></td>
+                    </tr>
+                    {{!-- <tr>
+                        <td>Danh mục</td>
+                        <td>
+                            <select name="categoryname" class="add-edit-select">
+                                <option value="ooi">
+                                </option>
+                            </select>
+                        </td>
+                    </tr> --}}
+                    <tr>
+                        <td>Giá</td>
+                        <td><input type="text" name="product_price" class="add-edit-input"></td>
+                       
+                    </tr>
+                    <tr>
+                        <td>Số Lượng</td>
+                        <td><input type="text" name="product_stock" class="add-edit-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả</td>
+                        <td><textarea name="product_info" cols="80" rows="2"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Nội dung</td>
+                        <td><textarea name="product_content" cols="50" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái</td>
+                        <td>
+                            <select name="product_status" class="add-edit-select">
+                                <option value="1">Hoạt động</option>
+                                <option value="0">Ẩn</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="function_click">
+                                {{!-- <input type="submit" value="Thêm mới" class="add-edit-submit"> --}}
+                                <button type="submit" class="add-edit-submit">Thêm mới</button>
+                                <a href="index.php?action=quanlysanpham&query=lietke" class="function_click-back">
+                                    <i class="fas fa-fw fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+            </form>
+        </table>
+    </div>
+</div>
+
+{{!-- <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" />
+    <button type="submit">Upload</button>
+</form> --}}

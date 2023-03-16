@@ -6,6 +6,7 @@ const app = express();
 const port = 8080;
 const session = require("express-session");
 const { changeLayout } = require("./app/middlewares/changeLayoutMiddleware");
+const fileUpload = require("express-fileupload");
 
 const route = require("./routes");
 const db = require("./config/db");
@@ -20,6 +21,14 @@ app.use(
     extended: true,
   })
 );
+app.use(
+  fileUpload({
+    limits: {
+      fileSize: 10000000, // Around 10MB
+    },
+    abortOnLimit: true,
+  })
+);
 
 // Middleware
 app.use(
@@ -31,8 +40,8 @@ app.use(
   })
 );
 
-// methodOverride 
-app.use(methodOverride('_method'))
+// methodOverride
+app.use(methodOverride("_method"));
 
 app.use(function (req, res, next) {
   res.locals.session = req.session;
@@ -47,11 +56,12 @@ app.engine(
     extname: "hbs",
     defaultLayout: "main",
     helpers: {
-      sum:(a,b) => a + b,
-      multiple:(a,b) => a * b 
-    }
+      sum: (a, b) => a + b,
+      multiple: (a, b) => a * b,
+    },
   })
 );
+
 app.set("view engine", "hbs");
 
 app.set("views", path.join(__dirname, "./resources/views"));

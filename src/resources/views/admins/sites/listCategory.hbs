@@ -1,5 +1,3 @@
-
-
 <div class="card-body">
     <div class="table-responsive">
         <div class="container-add-right">
@@ -31,7 +29,8 @@
                             <a href="/admin/viewEditCategory/{{this._id}}" class="function_click-edit">
                                 <i class="fas fa-fw fa-pen"></i>
                             </a>
-                            <a href="/delete-category/{{this._id}}" class="function_click-delete">
+                            <a href="/admin/delete-category/{{this._id}}" class="function_click-delete"
+                                data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-category">
                                 <i class="fas fa-fw fa-trash"></i>
                             </a>
                         </div>
@@ -44,3 +43,42 @@
         </table>
     </div>
 </div>
+
+{{!-- DELETE hidden form --}}
+<form method="post" name="delete-form"></form>
+
+
+{{!-- Confirm Delete --}}
+<!-- Modal -->
+<div class="modal fade" id="delete-category" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông báo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa danh mục này ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button id="btn-delete-product-cart" type="button" class="btn btn-danger">Xóa bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let deleteFrom = document.forms['delete-form'];
+    // When dialog confirm clicked
+    let btnDelete = document.getElementById("btn-delete-product-cart");
+    let delete_category = document.getElementById("delete-category");
+    delete_category.addEventListener('show.bs.modal', function (e) {
+        let _id = e.relatedTarget.getAttribute("data-id");
+        let button = document.createElement("button");
+        btnDelete.onclick = function () {
+            deleteFrom.action ='/admin/delete-category/' + _id + '?_method=DELETE';
+            deleteFrom.submit();
+        }
+    })
+</script>
