@@ -49,9 +49,11 @@ class ProductController {
     });
 
     if (product_cart.product_stock < number_quanity) {
-       return res.render("products/allProduct", {
-        error_quanity: `Số lượng trong cửa hàng còn : ${product_cart.product_stock} KG`,
-      });
+      req.flash('err', `Số lượng trong cửa hàng còn : ${product_cart.product_stock} KG`);
+      return res.redirect("/san-pham");
+      //  return res.render("products/allProduct", {
+      //   error_quanity: `Số lượng trong cửa hàng còn : ${product_cart.product_stock} KG`,
+      // });
     }
     if (!cartFound) {
       let products = [];

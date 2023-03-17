@@ -7,6 +7,7 @@ const port = 8080;
 const session = require("express-session");
 const { changeLayout } = require("./app/middlewares/changeLayoutMiddleware");
 const fileUpload = require("express-fileupload");
+const flash = require('express-flash');
 
 const route = require("./routes");
 const db = require("./config/db");
@@ -15,6 +16,7 @@ const db = require("./config/db");
 db.connect();
 
 app.use(express.static(path.join(__dirname, "public")));
+
 
 app.use(
   express.urlencoded({
@@ -61,6 +63,9 @@ app.engine(
     },
   })
 );
+
+app.use(flash());
+
 
 app.set("view engine", "hbs");
 

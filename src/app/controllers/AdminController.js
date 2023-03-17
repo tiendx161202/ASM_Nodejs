@@ -244,7 +244,7 @@ class AdminController {
     let number_stock = Number(product_stock);
     const { product_img } = req.files;
 
-     // If does not have image mime type prevent from uploading
+    //  If does not have image mime type prevent from uploading
      if (/^product_img/.test(product_img.mimetype)) return res.sendStatus(400);
 
     if (
@@ -255,6 +255,7 @@ class AdminController {
       !product_price ||
       !product_stock ||
       !product_status ||
+      !product_info ||
       !product_content
     ) {
       return res.render("admins/sites/addProduct", {
@@ -275,7 +276,9 @@ class AdminController {
     }
 
     // Move the uploaded image to our upload folder
-    product_img.mv(__dirname + '/upload/' + product_img.name);
+    const path = require("path");
+    // console.log(path.resolve(__dirname,'../../public/upload'));
+    product_img.mv(path.resolve(__dirname,'../../public/upload') + product_img.name);
 
     Product.create({
       product_name : product_name,
@@ -288,6 +291,14 @@ class AdminController {
     })
 
     return res.render("admins/sites/addProduct",{message : "Thêm sản phẩm thành công !"})
+  }
+
+  // [GET] /admin/showListProduct
+  async showListProduct(req,res,next) {
+    const listProduct = await Product.find({});
+    return res.render("admins/sites/listProduct",{
+      products: multipleMongooseToObject(listProduct),
+    });
   }
 }
 

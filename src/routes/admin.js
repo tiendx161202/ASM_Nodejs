@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const adminRouter = require("../app/controllers/AdminController");
 
+// Show all list product 
+router.get("/showListProduct" , adminRouter.showListProduct);
 // Show view addPRoduct in admin
 router.get("/addProduct" , adminRouter.addProduct);
 router.post("/addProduct" , adminRouter.addProductPost);
