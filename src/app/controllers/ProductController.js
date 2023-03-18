@@ -62,7 +62,6 @@ class ProductController {
         name: product_cart.product_name,
         quanity: number_quanity,
         unit_price: product_cart.product_price,
-        // total_price: product_cart.product_price * number_quanity,
         img: product_cart.product_img,
       };
       products.push(productIncart);

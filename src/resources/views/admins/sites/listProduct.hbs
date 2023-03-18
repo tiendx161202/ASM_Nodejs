@@ -40,10 +40,14 @@
                             {{this.product_name}}
                         </p>
                     </td>
-                    <td width="10%"><img src="../../img/uploads/<?php echo $row['product_img']; ?>"
+                    <td width="10%"><img src="/upload/{{this.product_img}}"
                             style="width:100%; padding: 5px;"></td>
+                        {{#if this.category_id}}
+
                     <td width="15%" align="center">
+                        {{this.category_id.categoryname}}
                     </td>
+                    {{/if}}
                     <td width="15%" align="center">
                         
                     </td>

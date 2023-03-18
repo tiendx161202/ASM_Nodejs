@@ -226,32 +226,34 @@ class AdminController {
   }
 
   // [GET] /admin/addProduct
-  addProduct(req, res, next) {
-    return res.render("admins/sites/addProduct");
+  async addProduct(req, res, next) {
+    const categories =await Category.find({});
+    return res.render("admins/sites/addProduct",{categories : multipleMongooseToObject(categories)});
   }
 
   // [POST] /admin/addProduct
   addProductPost(req, res, next) {
     const product_name = req.body.product_name;
     // const product_img = req.body.product_img;
-    // const categoryname = req.body.categoryname;
-    let product_price = req.body.product_price;
+    const category_id = req.body.category_id;
+    const product_price = req.body.product_price;
     const product_stock = req.body.product_stock;
     const product_content = req.body.product_content;
     const product_info = req.body.product_info;
     const product_status = req.body.product_status;
+
     let number_productPrice = Number(product_price);
     let number_stock = Number(product_stock);
     const { product_img } = req.files;
+
 
     //  If does not have image mime type prevent from uploading
      if (/^product_img/.test(product_img.mimetype)) return res.sendStatus(400);
 
     if (
       !product_name ||
-      !product_img ||
-      !product_stock ||
-      // !categoryname ||
+      // !product_img ||
+      !category_id ||
       !product_price ||
       !product_stock ||
       !product_status ||
@@ -278,24 +280,25 @@ class AdminController {
     // Move the uploaded image to our upload folder
     const path = require("path");
     // console.log(path.resolve(__dirname,'../../public/upload'));
-    product_img.mv(path.resolve(__dirname,'../../public/upload') + product_img.name);
+    product_img.mv(path.join(__dirname,'../../public/upload', product_img.name));
 
     Product.create({
       product_name : product_name,
       product_img : product_img.name,
+      category_id : category_id,
       product_price : number_productPrice,
       product_stock : number_stock,
       product_info : product_info,
       product_content : product_content,
       product_status : product_status,
     })
-
+    // console.log(categoryname);
     return res.render("admins/sites/addProduct",{message : "Thêm sản phẩm thành công !"})
   }
 
   // [GET] /admin/showListProduct
   async showListProduct(req,res,next) {
-    const listProduct = await Product.find({});
+    const listProduct = await Product.find({}).populate({path : "category_id"});
     return res.render("admins/sites/listProduct",{
       products: multipleMongooseToObject(listProduct),
     });

@@ -36,15 +36,18 @@
                         <td>Hình ảnh</td>
                         <td><input type="file" name="product_img" class="add-edit-input" accept="image/*"></td>
                     </tr>
-                    {{!-- <tr>
+                    <tr>
                         <td>Danh mục</td>
                         <td>
-                            <select name="categoryname" class="add-edit-select">
-                                <option value="ooi">
+                            <select name="category_id" class="add-edit-select">
+                                {{#each categories}}
+                                <option value="{{this._id}}">
+                                    {{this.categoryname}}
                                 </option>
+                                {{/each}}
                             </select>
                         </td>
-                    </tr> --}}
+                    </tr>
                     <tr>
                         <td>Giá</td>
                         <td><input type="text" name="product_price" class="add-edit-input"></td>
@@ -66,8 +69,8 @@
                         <td>Trạng thái</td>
                         <td>
                             <select name="product_status" class="add-edit-select">
-                                <option value="1">Hoạt động</option>
-                                <option value="0">Ẩn</option>
+                                <option value="Hoạt động">Hoạt động</option>
+                                <option value="Ẩn">Ẩn</option>
                             </select>
                         </td>
                     </tr>
