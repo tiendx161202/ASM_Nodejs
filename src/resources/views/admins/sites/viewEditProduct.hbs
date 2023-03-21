@@ -1,0 +1,93 @@
+<div>
+    {{#if message}}
+    <div class="alert alert-success text-center" role="alert">
+        {{message}}
+    </div>
+    {{/if}}
+</div>
+
+<div>
+    {{#if err_message}}
+    <div class="alert alert-danger text-center" role="alert">
+        {{err_message}}
+    </div>
+    {{/if}}
+</div>
+
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-add-edit" id="dataTable" width="100%" cellspacing="0">
+            <form method="post" action="/admin/edit-product/{{products._id}}?_method=PUT" enctype="multipart/form-data">
+                <thead>
+                    {{#if products}}
+                    <tr>
+                        <td>Tên sản phẩm</td>
+                        <td><input type="text" name="product_name" value="{{products.product_name}}"
+                                class="add-edit-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Hình ảnh</td>
+                        <td>
+                            <img src="/upload/{{products.product_img}}" width="150px">
+                            <input type="file" name="product_img">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Danh mục</td>
+                        <td>
+                            <select class="add-edit-select" id="category_id" value="{{products.category_id.categoryname}}"
+                                name="category_id">
+                                {{#each categories}}
+                                <option value="{{this._id}}" {{#ifCondition this._id 'eq'
+                                    ../products.category_id}}selected{{/ifCondition}}>
+                                    {{this.categoryname}}
+                                </option>
+                                {{/each}}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Giá</td>
+                        <td><input type="text" name="product_price" value="{{products.product_price}}"
+                                class="add-edit-input"></td>
+                    </tr>
+                    <tr>
+                        <td>So luong</td>
+                        <td><input type="text" name="product_stock" value="{{products.product_stock}}"
+                                class="add-edit-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả</td>
+                        <td><textarea name="product_info" cols="80" rows="2">{{products.product_info}}</textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Nội dung</td>
+                        <td><textarea name="product_content" cols="50" rows="10">{{products.product_content}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái</td>
+                        <td>
+                            <select name="product_status" class="add-edit-select">
+                                <option value="1">Hoạt động</option>
+                                <option value="0">Ẩn</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="function_click">
+                                <input type="submit" name="suasanpham" value="Cập nhập" class="add-edit-submit">
+                                <a href="" class="function_click-delete">
+                                    <i class="fas fa-fw fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/if}}
+                </thead>
+            </form>
+        </table>
+    </div>
+</div>

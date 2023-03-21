@@ -1,3 +1,19 @@
+<div>
+    {{#if messages.message}}
+    <div class="alert alert-success text-center" role="alert">
+        {{messages.message}}
+    </div>
+    {{/if}}
+</div>
+
+<div>
+    {{#if messages.success}}
+    <div class="alert alert-success text-center" role="alert">
+        {{messages.success}}
+    </div>
+    {{/if}}
+</div>
+
 <div class="card-body">
     <div class="table-responsive">
         <form action="" method="post" autocomplete="off">
@@ -13,7 +29,7 @@
                     </div>
                 </div>
                 <div class="container-add">
-                    <a href="index.php?action=quanlysanpham&query=them" class="container-add-click">Add</a>
+                    <a href="/admin/addProduct" class="container-add-click">Add</a>
                 </div>
             </div>
         </form>
@@ -29,7 +45,7 @@
                     <th>Chức năng</th>
                 </tr>
             </thead>
-           {{#each products}}
+            {{#each products}}
             <tbody>
                 <tr>
                     <td width="5%" align="center">
@@ -40,29 +56,23 @@
                             {{this.product_name}}
                         </p>
                     </td>
-                    <td width="10%"><img src="/upload/{{this.product_img}}"
-                            style="width:100%; padding: 5px;"></td>
-                        {{#if this.category_id}}
+                    <td width="10%"><img src="/upload/{{this.product_img}}" style="width:100%; padding: 5px;"></td>
+                    {{#if this.category_id}}
 
                     <td width="15%" align="center">
                         {{this.category_id.categoryname}}
                     </td>
                     {{/if}}
                     <td width="15%" align="center">
-                        
+
                     </td>
                     <td width="15%">
                         <div class="function_click">
-                            <a href="?action=quanlysanpham&query=xem&idsanpham=<?php echo $row['product_id'] ?>"
-                                class="function_click-see">
-                                <i class="fas fa-fw fa-bars"></i>
-                            </a>
-                            <a href="?action=quanlysanpham&query=sua&idsanpham=<?php echo $row['product_id'] ?>"
-                                class="function_click-edit">
+                            <a href="/admin/edit-product/{{this._id}}" class="function_click-edit">
                                 <i class="fas fa-fw fa-pen"></i>
                             </a>
-                            <a href="product/xuly.php?idsanpham=<?php echo $row['product_id'] ?>"
-                                class="function_click-delete">
+                            <a href="" data-id="{{this._id}}" data-bs-toggle="modal"
+                                data-bs-target="#delete-product" class="function_click-delete">
                                 <i class="fas fa-fw fa-trash"></i>
                             </a>
                         </div>
@@ -74,3 +84,45 @@
 
     </div>
 </div>
+
+{{!-- DELETE hidden form --}}
+<form method="post" name="delete-form"></form>
+
+
+{{!-- Confirm Delete --}}
+<!-- Modal -->
+<div class="modal fade" id="delete-product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông báo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa sản phẩm này ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button id="btn-delete-product" type="button" class="btn btn-danger">Xóa bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let deleteFrom = document.forms['delete-form'];
+
+    let btnDeleteProduct = document.getElementById("btn-delete-product");
+    console.log(btnDeleteProduct);
+    let delete_product = document.getElementById("delete-product");
+
+    delete_product.addEventListener('show.bs.modal', function (e) {
+        let _id = e.relatedTarget.getAttribute("data-id");
+        let button = document.createElement("button");
+        btnDeleteProduct.onclick = function () {
+            deleteFrom.action ='/admin/delete-product/' + _id + '?_method=DELETE';
+            deleteFrom.submit();
+        }
+    })
+
+</script>

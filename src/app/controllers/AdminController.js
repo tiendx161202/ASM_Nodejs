@@ -303,6 +303,77 @@ class AdminController {
       products: multipleMongooseToObject(listProduct),
     });
   }
+
+  // [GET] /admin/edit-product/:id
+  async editProduct(req, res,next){
+    const category = await Category.find({});
+    const idProduct = await Product.findOne({_id: req.params.id});
+    return res.render("admins/sites/viewEditProduct" , {
+      products :mongooseToObject(idProduct),
+      categories: multipleMongooseToObject(category),
+    });
+  }
+  //[PUT] admin/eddit-product/:id
+  editProductPut(req, res, next){
+    const product_name = req.body.product_name;
+    // const product_img = req.body.product_img;
+    const category_id = req.body.category_id;
+    const product_price = req.body.product_price;
+    const product_stock = req.body.product_stock;
+    const product_content = req.body.product_content;
+    const product_info = req.body.product_info;
+    const product_status = req.body.product_status;
+
+    let number_productPrice = Number(product_price);
+    let number_stock = Number(product_stock);
+    const { product_img } = req.files;
+
+
+    //  If does not have image mime type prevent from uploading
+     if (/^product_img/.test(product_img.mimetype)) return res.sendStatus(400);
+
+    if (
+      !product_name ||
+      // !product_img ||
+      !category_id ||
+      !number_productPrice ||
+      !number_stock ||
+      !product_status ||
+      !product_info ||
+      !product_content
+    ) {
+      return res.render("admins/sites/viewEditProduct", {
+        err_message: "Bạn phải đăng nhập đầy đủ thông tin !",
+      });
+    }
+
+    // Move the uploaded image to our upload folder
+    const path = require("path");
+    // console.log(path.resolve(__dirname,'../../public/upload'));
+    product_img.mv(path.join(__dirname,'../../public/upload', product_img.name));
+    Product.findByIdAndUpdate(req.params.id ,{
+      product_name : product_name,
+      product_img : product_img.name,
+      category_id : category_id,
+      product_price : number_productPrice,
+      product_stock : number_stock,
+      product_info : product_info,
+      product_content : product_content,
+      product_status : product_status,
+    })
+    .then(() => {
+      req.flash('success', 'Sửa thành công.');
+      res.redirect('/admin/showListProduct')
+    })
+    .catch(next)
+  }
+
+  // [DELETE] /delete-product/:id
+  deleteProduct(req, res, next) {
+    Product.deleteOne({ _id: req.params.id })
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
 }
 
 module.exports = new AdminController();

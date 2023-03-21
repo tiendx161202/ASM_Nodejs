@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const adminRouter = require("../app/controllers/AdminController");
 
+// Delete product in admin
+router.delete("/delete-product/:id", adminRouter.deleteProduct);
+// Edit product in admin
+router.get("/edit-product/:id",adminRouter.editProduct);
+router.put("/edit-product/:id",adminRouter.editProductPut);
 // Show all list product 
 router.get("/showListProduct" , adminRouter.showListProduct);
 // Show view addPRoduct in admin

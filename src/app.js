@@ -7,7 +7,7 @@ const port = 8080;
 const session = require("express-session");
 const { changeLayout } = require("./app/middlewares/changeLayoutMiddleware");
 const fileUpload = require("express-fileupload");
-const flash = require('express-flash');
+const flash = require("express-flash");
 
 const route = require("./routes");
 const db = require("./config/db");
@@ -16,7 +16,6 @@ const db = require("./config/db");
 db.connect();
 
 app.use(express.static(path.join(__dirname, "public")));
-
 
 app.use(
   express.urlencoded({
@@ -60,13 +59,39 @@ app.engine(
     helpers: {
       sum: (a, b) => a + b,
       multiple: (a, b) => a * b,
+      ifCondition: (a, operator, b, options) => {
+        switch (operator) {
+          case "==":
+            return a == b ? options.fn(this) : options.inverse(this);
+          case "===":
+            return a === b ? options.fn(this) : options.inverse(this);
+          case "!=":
+            return a != b ? options.fn(this) : options.inverse(this);
+          case "!==":
+            return a !== b ? options.fn(this) : options.inverse(this);
+          case "<":
+            return a < b ? options.fn(this) : options.inverse(this);
+          case "<=":
+            return a <= b ? options.fn(this) : options.inverse(this);
+          case ">":
+            return a > b ? options.fn(this) : options.inverse(this);
+          case ">=":
+            return a >= b ? options.fn(this) : options.inverse(this);
+          case "&&":
+            return a && b ? options.fn(this) : options.inverse(this);
+          case "||":
+            return a || b ? options.fn(this) : options.inverse(this);
+          case "eq":
+            return a.equals(b) ? options.fn(this) : options.inverse(this);
+          default:
+            return options.inverse(this);
+        }
+      },
     },
   })
 );
 
 app.use(flash());
-
-
 app.set("view engine", "hbs");
 
 app.set("views", path.join(__dirname, "./resources/views"));
