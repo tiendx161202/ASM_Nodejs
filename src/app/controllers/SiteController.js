@@ -6,16 +6,13 @@ const {
   mongooseToObject,
   multipleMongooseToObject,
 } = require("../../util/mongoose");
+const Category = require("../models/Category");
 
 class SiteController {
-  index(req, res) {
-    Product.find({}).then(function (product) {
-      if (!product) {
-        return res.status(400).json({ error: "message" });
-      }
-      res.render("sites/home", {
-        products: multipleMongooseToObject(product),
-      });
+  async index(req, res) {
+    const product = await Product.find({});
+    return res.render("sites/home", {
+      products: multipleMongooseToObject(product),
     });
   }
 

@@ -109,6 +109,16 @@ class ProductController {
     return res.redirect("/san-pham");
     // return res.render("products/allProduct");
   }
+
+  // [GET] /san-pham/getCategory/:id
+  async getCategory(req, res) {
+    const category = await Category.find({});
+    const productCategory = await Product.find({category_id: req.params.id});
+    return res.render("products/productofcategory",{
+      categories : multipleMongooseToObject(category),
+      products:multipleMongooseToObject(productCategory),
+    })
+  }
 }
 
 module.exports = new ProductController();
