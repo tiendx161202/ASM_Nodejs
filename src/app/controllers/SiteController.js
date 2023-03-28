@@ -10,9 +10,29 @@ const Category = require("../models/Category");
 
 class SiteController {
   async index(req, res) {
-    const product = await Product.find({});
+    let product = await Product.find({}).populate({
+      path: "category_id",
+    });
+    let rau = [];
+    let cu = [];
+    product.forEach((p) => {
+      if (p.category_id.categoryname.toLowerCase() == "rau") {
+        if (rau.length == 4) {
+          return;
+        }
+        rau.push(p);
+      } else if (p.category_id.categoryname.toLowerCase() == "củ") {
+        if (cu.length == 4) {
+          return;
+        }
+        cu.push(p);
+      }
+    });
+
     return res.render("sites/home", {
-      products: multipleMongooseToObject(product),
+      // products: multipleMongooseToObject(product),
+      rau: multipleMongooseToObject(rau),
+      cu: multipleMongooseToObject(cu),
     });
   }
 
@@ -95,7 +115,7 @@ class SiteController {
         email: email,
         address: address,
         numberphone: numberphone,
-        role_name : "member"
+        role_name: "member",
       });
       return res.render("sites/register", {
         message: "Đăng ký thành công",
@@ -181,15 +201,18 @@ class SiteController {
       //   console.log(thanhtien);
       // });
 
-      return res.render("sites/cart", { cart: mongooseToObject(cartProduct),total_price : total_price});
+      return res.render("sites/cart", {
+        cart: mongooseToObject(cartProduct),
+        total_price: total_price,
+      });
     }
   }
 
   // [DELETE] /:id
-  deleteProductCart(req,res,next){
-    Cart.deleteOne({_id:req.params.id})
-        .then(()=> res.redirect('back'))
-        .catch(next);
+  deleteProductCart(req, res, next) {
+    Cart.deleteOne({ _id: req.params.id })
+      .then(() => res.redirect("back"))
+      .catch(next);
   }
 }
 

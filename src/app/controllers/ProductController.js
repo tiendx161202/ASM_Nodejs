@@ -14,6 +14,10 @@ class ProductController {
     const product = await Product.find({});
     const categori = await Category.find({});
     res.render("products/allProduct", {
+      pagination: {
+        page: 1,
+        pageCount: 10
+      },
       products: multipleMongooseToObject(product),
       categories: multipleMongooseToObject(categori),
     });

@@ -59,6 +59,7 @@ app.engine(
     helpers: {
       sum: (a, b) => a + b,
       multiple: (a, b) => a * b,
+      paginate: require('handlebars-paginate'),
       ifCondition: (a, operator, b, options) => {
         switch (operator) {
           case "==":
